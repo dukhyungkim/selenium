@@ -8,4 +8,5 @@ vendor/*
 !vendor/*.go
 coverage.txt
 coverage.out
-.idea/*
+.idea
+.DS_Store

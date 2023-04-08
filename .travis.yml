@@ -7,7 +7,7 @@ jdk:
     - openjdk11
 
 before_script:
-  # Download all of the binary dependencies needed to run the tests.
+  # Download all the binary dependencies needed to run the tests.
   - cd vendor && go run init.go --alsologtostderr --download_browsers --download_latest && cd ..
 
 env:
