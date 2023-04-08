@@ -131,7 +131,7 @@ type Proxy struct {
 	// Type is the type of proxy to use. This is required to be populated.
 	Type ProxyType `json:"proxyType"`
 
-	// AutoconfigURL is the URL to be used for proxy auto configuration. This is
+	// AutoconfigURL is the URL to be used for proxy autoconfiguration. This is
 	// required if Type is set to PAC.
 	AutoconfigURL string `json:"proxyAutoconfigUrl,omitempty"`
 
@@ -330,7 +330,7 @@ type WebDriver interface {
 
 	// FindElement finds exactly one element in the current page's DOM.
 	FindElement(by, value string) (WebElement, error)
-	// FindElement finds potentially many elements in the current page's DOM.
+	// FindElements finds potentially many elements in the current page's DOM.
 	FindElements(by, value string) ([]WebElement, error)
 	// ActiveElement returns the currently active element on the page.
 	ActiveElement() (WebElement, error)
@@ -340,14 +340,14 @@ type WebDriver interface {
 	// DecodeElements decodes a multi-element response.
 	DecodeElements([]byte) ([]WebElement, error)
 
-	// GetCookies returns all of the cookies in the browser's jar.
+	// GetCookies returns all the cookies in the browser's jar.
 	GetCookies() ([]Cookie, error)
 	// GetCookie returns the named cookie in the jar, if present. This method is
 	// only implemented for Firefox.
 	GetCookie(name string) (Cookie, error)
 	// AddCookie adds a cookie to the browser's jar.
 	AddCookie(cookie *Cookie) error
-	// DeleteAllCookies deletes all of the cookies in the browser's jar.
+	// DeleteAllCookies deletes all the cookies in the browser's jar.
 	DeleteAllCookies() error
 	// DeleteCookie deletes a cookie to the browser's jar.
 	DeleteCookie(name string) error
@@ -448,7 +448,7 @@ type WebElement interface {
 
 	// FindElement finds a child element.
 	FindElement(by, value string) (WebElement, error)
-	// FindElement finds multiple children elements.
+	// FindElements finds multiple children elements.
 	FindElements(by, value string) ([]WebElement, error)
 
 	// TagName returns the element's name.

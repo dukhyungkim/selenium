@@ -707,7 +707,7 @@ func (wd *remoteWD) DecodeElement(data []byte) (WebElement, error) {
 
 const (
 	// legacyWebElementIdentifier is the string constant used in the old
-	// WebDriver JSON protocol that is the key for the map that contains an
+	// WebDriver JSON protocol that is the key for the map that contains a
 	// unique element identifier.
 	legacyWebElementIdentifier = "ELEMENT"
 
@@ -807,7 +807,7 @@ func (wd *remoteWD) MinimizeWindow(name string) error {
 
 func (wd *remoteWD) modifyWindow(name, verb, command string, params interface{}) error {
 	// The original protocol allowed for maximizing any named window. The W3C
-	// specification only allows the current window be be modified. Emulate the
+	// specification only allows the current window is modified. Emulate the
 	// previous behavior by switching to the target window, maximizing the
 	// current window, and switching back to the original window.
 	var startWindow string
@@ -1159,7 +1159,7 @@ func PointerDownAction(button MouseButton) PointerAction {
 }
 
 func (wd *remoteWD) StoreKeyActions(inputID string, actions ...KeyAction) {
-	rawActions := []map[string]interface{}{}
+	var rawActions []map[string]interface{}
 	for _, action := range actions {
 		rawActions = append(rawActions, action)
 	}
@@ -1171,7 +1171,7 @@ func (wd *remoteWD) StoreKeyActions(inputID string, actions ...KeyAction) {
 }
 
 func (wd *remoteWD) StorePointerActions(inputID string, pointer PointerType, actions ...PointerAction) {
-	rawActions := []map[string]interface{}{}
+	var rawActions []map[string]interface{}
 	for _, action := range actions {
 		rawActions = append(rawActions, action)
 	}
@@ -1365,7 +1365,7 @@ type remoteWE struct {
 	parent *remoteWD
 	// Prior to the W3C specification, elements would be returned as a map with
 	// the literal key "ELEMENT" and a value of a UUID. The W3C specification
-	// specifies that this key has changed to an UUID-based string constant and
+	// specifies that this key has changed to a UUID-based string constant and
 	// that the value is called a "reference". For ease of transition, we store
 	// the "reference" in this now misnamed field.
 	id string

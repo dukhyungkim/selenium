@@ -68,18 +68,18 @@ type Capabilities struct {
 	// The visibility of the job.
 	Visibility Visibility `json:"public,omitempty"`
 
-	// By default, Sauce records a video of every test run. Set this to false to
+	// By default, Sauce records a video of every test run. Set this false to
 	// disable recording video.
 	RecordVideo *bool `json:"recordVideo,omitempty"`
-	// Set to false to discard videos for passing tests identified using the
+	// Set false to discard videos for passing tests identified using the
 	// passed  setting. This disables video post-processing and uploading that
 	// may otherwise consume some extra time.
 	UploadVideoOnPass *bool `json:"videoUploadOnPass,omitempty"`
-	// Set to false to prevent recording of screenshots.
+	// Set false to prevent recording of screenshots.
 	RecordScreenshots *bool `json:"recordScreenshots,omitempty"`
-	// Set to false to disable log recording.
+	// Set false to disable log recording.
 	RecordLogs *bool `json:"recordLogs,omitempty"`
-	// Set to false to disable capturing the HTML source at each step.
+	// Set false to disable capturing the HTML source at each step.
 	CaptureHTML *bool `json:"captureHtml,omitempty"`
 
 	// The priority level of the job. Used for determining which job to start
@@ -91,7 +91,7 @@ type Capabilities struct {
 	// failure, for example if an element is not found. Sauce disables this by
 	// default to reduce network traffic during tests, resulting in a
 	// considerable performance improvement in most tests. Set this to true to
-	// reenable this feature.
+	// re-enable this feature.
 	WebDriverScreenshot *bool `json:"webdriverRemoteQuietExceptions,omitempty"`
 }
 

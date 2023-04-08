@@ -132,7 +132,7 @@ See [the issue tracker][issues] for features that need implementing.
 
 ### Testing Locally
 
-Install `xvfb` and Java if they is not already installed, e.g.:
+Install `xvfb` and Java if they are not already installed, e.g.:
 
 ```
 sudo apt-get install xvfb openjdk-11-jre

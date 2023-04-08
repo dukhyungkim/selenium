@@ -1448,7 +1448,7 @@ func testWait(t *testing.T, c Config) {
 		t.Fatalf("wd.Get(%q) returned error: %v", titleURL, err)
 	}
 
-	// Testing when the Wait() should error the timeout..
+	// Testing when the Wait() should error the timeout.
 	if err := wd.WaitWithTimeout(titleChangeCondition, 500*time.Millisecond); err == nil {
 		t.Fatalf("wd.Wait(titleChangeCondition) should returned error, but it didn't.")
 	}

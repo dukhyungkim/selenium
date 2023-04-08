@@ -82,7 +82,7 @@ type MobileEmulation struct {
 	// DeviceName is the name of the device to emulate, e.g. "Google Nexus 5".
 	// It should not be set if DeviceMetrics and UserAgent are set.
 	DeviceName string `json:"deviceName,omitempty"`
-	// DeviceMetrics provides specifications of an device to emulate. It should
+	// DeviceMetrics provides specifications of a device to emulate. It should
 	// not be set if DeviceName is set.
 	DeviceMetrics *DeviceMetrics `json:"deviceMetrics,omitempty"`
 	// UserAgent specifies the user agent string to send to the remote web
@@ -109,10 +109,10 @@ type PerfLoggingPreferences struct {
 	// EnableNetwork specifies whether of not to collect events from the Network
 	// domain. The default is true.
 	EnableNetwork *bool `json:"enableNetwork,omitempty"`
-	// EnablePage specifies whether or not to collect events from the Page
+	// EnablePage specifies whether to collect events from the Page
 	// domain. The default is true.
 	EnablePage *bool `json:"enablePage,omitempty"`
-	// EnableTimeline specifies whether or not to collect events from the
+	// EnableTimeline specifies whether to collect events from the
 	// Timeline domain. When tracing is enabled, Timeline domain is implicitly
 	// disabled, unless enableTimeline is explicitly set to true.
 	EnableTimeline *bool `json:"enableTimeline,omitempty"`
@@ -128,7 +128,7 @@ type PerfLoggingPreferences struct {
 }
 
 // AddExtension adds an extension for the browser to load at startup. The path
-// parameter should be a path to an extension file (which typically has a
+// parameter should be a path to an extension file which typically has a
 // `.crx` file extension. Note that the contents of the file will be loaded
 // into memory, as required by the protocol.
 func (c *Capabilities) AddExtension(path string) error {
