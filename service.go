@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
@@ -322,7 +321,7 @@ func NewFrameBufferWithOptions(options FrameBufferOptions) (*FrameBuffer, error)
 	}
 	defer r.Close()
 
-	auth, err := ioutil.TempFile("", "selenium-xvfb")
+	auth, err := os.CreateTemp("", "selenium-xvfb")
 	if err != nil {
 		return nil, err
 	}

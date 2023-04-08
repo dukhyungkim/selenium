@@ -2,7 +2,6 @@ package sauce
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -78,7 +77,7 @@ func (c *Connect) Start() error {
 		}
 	}
 
-	dir, err := ioutil.TempDir("", "selenium-sauce-connect")
+	dir, err := os.MkdirTemp("", "selenium-sauce-connect")
 	if err != nil {
 		return err
 	}
@@ -90,7 +89,7 @@ func (c *Connect) Start() error {
 	if c.PIDFile != "" {
 		pidFilePath = c.PIDFile
 	} else {
-		f, err := ioutil.TempFile("", "selenium-sauce-connect-pid.")
+		f, err := os.CreateTemp("", "selenium-sauce-connect-pid.")
 		if err != nil {
 			return err
 		}

@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"mime"
 	"net/http"
 	"net/url"
@@ -140,7 +140,7 @@ func executeCommand(method, url string, data []byte) (json.RawMessage, error) {
 		return nil, err
 	}
 
-	buf, err := ioutil.ReadAll(response.Body)
+	buf, err := io.ReadAll(response.Body)
 	if debugFlag {
 		if err == nil {
 			// Pretty print the JSON response
@@ -914,7 +914,7 @@ type cookie struct {
 	Secure   bool        `json:"secure"`
 	Expiry   interface{} `json:"expiry"`
 	HTTPOnly bool        `json:"httpOnly"`
-	SameSite string      `json:"sameSite",omitempty`
+	SameSite string      `json:"sameSite,omitempty"`
 }
 
 func (c cookie) sanitize() Cookie {
@@ -1279,7 +1279,7 @@ func (wd *remoteWD) Screenshot() ([]byte, error) {
 	// Selenium returns a base64 encoded image.
 	buf := []byte(data)
 	decoder := base64.NewDecoder(base64.StdEncoding, bytes.NewBuffer(buf))
-	return ioutil.ReadAll(decoder)
+	return io.ReadAll(decoder)
 }
 
 // Condition is an alias for a type that is passed as an argument
@@ -1577,5 +1577,5 @@ func (elem *remoteWE) Screenshot(scroll bool) ([]byte, error) {
 	// Selenium returns a base64 encoded image.
 	buf := []byte(data)
 	decoder := base64.NewDecoder(base64.StdEncoding, bytes.NewBuffer(buf))
-	return ioutil.ReadAll(decoder)
+	return io.ReadAll(decoder)
 }
