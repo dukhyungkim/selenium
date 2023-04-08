@@ -21,8 +21,8 @@ import (
 	"testing"
 	"time"
 
-	socks5 "github.com/armon/go-socks5"
-	"github.com/blang/semver"
+	"github.com/armon/go-socks5"
+	"github.com/blang/semver/v4"
 	"github.com/dukhyungkim/selenium"
 	"github.com/dukhyungkim/selenium/chrome"
 	"github.com/dukhyungkim/selenium/firefox"

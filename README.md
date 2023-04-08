@@ -48,7 +48,7 @@ Selenium WebDriver JARs, and the Sauce Connect proxy binary. This is primarily
 intended for testing.
 
 ```
-cd vendor
+cd downloader
 go run init.go --alsologtostderr  --download_browsers --download_latest
 cd ..
 ```

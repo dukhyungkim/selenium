@@ -13,7 +13,6 @@ import (
 	"fmt"
 	"hash"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
@@ -25,7 +24,7 @@ import (
 
 	"cloud.google.com/go/storage"
 	"github.com/golang/glog"
-	"github.com/google/go-github/v27/github"
+	"github.com/google/go-github/v51/github"
 	"google.golang.org/api/option"
 )
 
@@ -131,7 +130,7 @@ func addChrome(ctx context.Context, latestChromeBuild string) error {
 		}
 		defer r.Close()
 		// Read the last change file content for the latest build directory name
-		data, err := ioutil.ReadAll(r)
+		data, err := io.ReadAll(r)
 		if err != nil {
 			return fmt.Errorf("cannot read from %s%s file: %v", gcsPath, lastChangeFile, err)
 		}
@@ -162,7 +161,7 @@ func addChrome(ctx context.Context, latestChromeBuild string) error {
 
 // addFirefox adds the appropriate Firefox files to the list.
 //
-// If `desiredVersion` is empty, the the latest version will be used.
+// If `desiredVersion` is empty, the latest version will be used.
 // Otherwise, the specific version will be used.
 func addFirefox(desiredVersion string) {
 	if desiredVersion == "" {

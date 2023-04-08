@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/blang/semver"
+	"github.com/blang/semver/v4"
 	"github.com/dukhyungkim/selenium/firefox"
 	"github.com/dukhyungkim/selenium/log"
 )

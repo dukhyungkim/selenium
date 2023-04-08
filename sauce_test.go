@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/blang/semver"
+	"github.com/blang/semver/v4"
 	"github.com/dukhyungkim/selenium"
 	"github.com/dukhyungkim/selenium/internal/seleniumtest"
 	"github.com/dukhyungkim/selenium/sauce"

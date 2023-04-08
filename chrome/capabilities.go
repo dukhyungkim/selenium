@@ -14,9 +14,9 @@ import (
 	"io"
 	"os"
 
+	"github.com/dukhyungkim/selenium/chrome/pb"
 	"github.com/dukhyungkim/selenium/internal/zip"
-	"github.com/golang/protobuf/proto"
-	"github.com/mediabuyerbot/go-crx3/pb"
+	"google.golang.org/protobuf/proto"
 )
 
 // CapabilitiesKey is the key in the top-level Capabilities map under which
@@ -249,7 +249,7 @@ func crx3Header(archiveData []byte, key *rsa.PrivateKey) ([]byte, error) {
 
 	header := &pb.CrxFileHeader{
 		Sha256WithRsa: []*pb.AsymmetricKeyProof{
-			&pb.AsymmetricKeyProof{
+			{
 				PublicKey: pubKey,
 				Signature: signature,
 			},
