@@ -284,7 +284,7 @@ func (wd *remoteWD) voidCommand(urlTemplate string, params interface{}) error {
 	return voidCommand("POST", wd.requestURL(urlTemplate, wd.id), params)
 }
 
-func (wd remoteWD) stringsCommand(urlTemplate string) ([]string, error) {
+func (wd *remoteWD) stringsCommand(urlTemplate string) ([]string, error) {
 	url := wd.requestURL(urlTemplate, wd.id)
 	response, err := wd.execute("GET", url, nil)
 	if err != nil {
