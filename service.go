@@ -254,7 +254,7 @@ func (s *Service) start(port int) error {
 		time.Sleep(time.Second)
 		resp, err := http.Get(s.addr + "/status")
 		if err == nil {
-			resp.Body.Close()
+			_ = resp.Body.Close()
 			switch resp.StatusCode {
 			// Selenium <3 returned Forbidden and BadRequest. ChromeDriver and
 			// Selenium 3 return OK.
@@ -280,7 +280,7 @@ func (s *Service) Stop() error {
 		if err != nil {
 			return err
 		}
-		resp.Body.Close()
+		_ = resp.Body.Close()
 	}
 	if err := s.cmd.Wait(); err != nil && err.Error() != "signal: killed" {
 		return err
@@ -319,7 +319,9 @@ func NewFrameBufferWithOptions(options FrameBufferOptions) (*FrameBuffer, error)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Close()
+	defer func() {
+		_ = r.Close()
+	}()
 
 	auth, err := os.CreateTemp("", "selenium-xvfb")
 	if err != nil {
@@ -350,7 +352,7 @@ func NewFrameBufferWithOptions(options FrameBufferOptions) (*FrameBuffer, error)
 	if err := xvfb.Start(); err != nil {
 		return nil, err
 	}
-	w.Close()
+	_ = w.Close()
 
 	type resp struct {
 		display string
@@ -395,7 +397,7 @@ func (f FrameBuffer) Stop() error {
 	if err := f.cmd.Process.Kill(); err != nil {
 		return err
 	}
-	os.Remove(f.AuthPath) // best effort removal; ignore error
+	_ = os.Remove(f.AuthPath) // best effort removal; ignore error
 	if err := f.cmd.Wait(); err != nil && err.Error() != "signal: killed" {
 		return err
 	}

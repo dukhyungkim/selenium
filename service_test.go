@@ -84,7 +84,9 @@ func TestFrameBuffer(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Could not create frame buffer: %s", err.Error())
 		}
-		defer frameBuffer.Stop()
+		defer func() {
+			_ = frameBuffer.Stop()
+		}()
 
 		if frameBuffer.Display == "" {
 			t.Fatalf("frameBuffer.Display is empty")
@@ -124,7 +126,9 @@ func TestFrameBuffer(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Could not create frame buffer: %s", err.Error())
 		}
-		defer frameBuffer.Stop()
+		defer func() {
+			_ = frameBuffer.Stop()
+		}()
 
 		if frameBuffer.Display == "" {
 			t.Fatalf("frameBuffer.Display is empty")

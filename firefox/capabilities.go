@@ -52,7 +52,7 @@ func (c *Capabilities) SetProfile(basePath string) error {
 	if _, err := buf.WriteTo(encoder); err != nil {
 		return err
 	}
-	encoder.Close()
+	_ = encoder.Close()
 
 	c.Profile = encoded.String()
 

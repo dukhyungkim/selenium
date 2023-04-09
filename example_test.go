@@ -24,8 +24,8 @@ func Example() {
 	// running).
 	const (
 		// These paths will be different on your system.
-		seleniumPath    = "vendor/selenium-server-standalone-3.4.jar"
-		geckoDriverPath = "vendor/geckodriver-v0.18.0-linux64"
+		seleniumPath    = "downloads/selenium-server-standalone-3.4.jar"
+		geckoDriverPath = "downloads/geckodriver-v0.18.0-linux64"
 		port            = 8080
 	)
 	opts := []selenium.ServiceOption{
@@ -38,7 +38,9 @@ func Example() {
 	if err != nil {
 		panic(err) // panic is used only as an example and is not otherwise recommended.
 	}
-	defer service.Stop()
+	defer func() {
+		_ = service.Stop()
+	}()
 
 	// Connect to the WebDriver instance running locally.
 	caps := selenium.Capabilities{"browserName": "firefox"}
@@ -46,7 +48,9 @@ func Example() {
 	if err != nil {
 		panic(err)
 	}
-	defer wd.Quit()
+	defer func() {
+		_ = wd.Quit()
+	}()
 
 	// Navigate to the simple playground interface.
 	if err := wd.Get("http://play.golang.org/?simple=1"); err != nil {

@@ -136,7 +136,9 @@ func (c *Capabilities) AddExtension(path string) error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
+	defer func() {
+		_ = f.Close()
+	}()
 	return c.addExtension(f)
 }
 
@@ -148,7 +150,7 @@ func (c *Capabilities) addExtension(r io.Reader) error {
 	if _, err := io.Copy(encoder, bufio.NewReader(r)); err != nil {
 		return err
 	}
-	encoder.Close()
+	_ = encoder.Close()
 	c.Extensions = append(c.Extensions, buf.String())
 	return nil
 }

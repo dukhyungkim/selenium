@@ -20,14 +20,14 @@ import (
 
 var (
 	selenium3Path          = flag.String("selenium3_path", "", "The path to the Selenium 3 server JAR. If empty or the file is not present, Firefox tests using Selenium 3 will not be run.")
-	firefoxBinarySelenium3 = flag.String("firefox_binary_for_selenium3", "vendor/firefox/firefox", "The name of the Firefox binary for Selenium 3 tests or the path to it. If the name does not contain directory separators, the PATH will be searched.")
+	firefoxBinarySelenium3 = flag.String("firefox_binary_for_selenium3", "downloads/firefox/firefox", "The name of the Firefox binary for Selenium 3 tests or the path to it. If the name does not contain directory separators, the PATH will be searched.")
 	geckoDriverPath        = flag.String("geckodriver_path", "", "The path to the geckodriver binary. If empty or the file is not present, the Geckodriver tests will not be run.")
 	javaPath               = flag.String("java_path", "", "The path to the Java runtime binary to invoke. If not specified, 'java' will be used.")
 
 	chromeDriverPath = flag.String("chrome_driver_path", "", "The path to the ChromeDriver binary. If empty or the file is not present, Chrome tests will not be run.")
-	chromeBinary     = flag.String("chrome_binary", "vendor/chrome-linux/chrome", "The name of the Chrome binary or the path to it. If name is not an exact path, the PATH will be searched.")
+	chromeBinary     = flag.String("chrome_binary", "downloads/chrome-linux/chrome", "The name of the Chrome binary or the path to it. If name is not an exact path, the PATH will be searched.")
 
-	htmlUnitDriverPath = flag.String("htmlunit_driver_path", "vendor/htmlunit-driver.jar", "The path to the HTMLUnit Driver JAR.")
+	htmlUnitDriverPath = flag.String("htmlunit_driver_path", "downloads/htmlunit-driver.jar", "The path to the HTMLUnit Driver JAR.")
 
 	useDocker          = flag.Bool("docker", false, "If set, run the tests in a Docker container.")
 	runningUnderDocker = flag.Bool("running_under_docker", false, "This is set by the Docker test harness and should not be needed otherwise.")
@@ -39,7 +39,7 @@ var (
 func TestMain(m *testing.M) {
 	flag.Parse()
 	if err := setDriverPaths(); err != nil {
-		fmt.Fprintf(os.Stderr, "Exiting early: unable to get the driver paths -- %s", err.Error())
+		_, _ = fmt.Fprintf(os.Stderr, "Exiting early: unable to get the driver paths -- %s", err.Error())
 		os.Exit(1)
 	}
 	os.Exit(m.Run())
@@ -76,15 +76,15 @@ func findBestPath(glob string, binary bool) string {
 
 func setDriverPaths() error {
 	if *selenium3Path == "" {
-		*selenium3Path = findBestPath("vendor/selenium-server*" /*binary=*/, false)
+		*selenium3Path = findBestPath("downloads/selenium-server*" /*binary=*/, false)
 	}
 
 	if *geckoDriverPath == "" {
-		*geckoDriverPath = findBestPath("vendor/geckodriver*" /*binary=*/, true)
+		*geckoDriverPath = findBestPath("downloads/geckodriver*" /*binary=*/, true)
 	}
 
 	if *chromeDriverPath == "" {
-		*chromeDriverPath = findBestPath("vendor/chromedriver*" /*binary=*/, true)
+		*chromeDriverPath = findBestPath("downloads/chromedriver*" /*binary=*/, true)
 	}
 
 	return nil

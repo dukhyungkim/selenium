@@ -128,7 +128,9 @@ func addChrome(ctx context.Context, latestChromeBuild string) error {
 		if err != nil {
 			return fmt.Errorf("cannot create a reader for %s%s file: %v", gcsPath, lastChangeFile, err)
 		}
-		defer r.Close()
+		defer func() {
+			_ = r.Close()
+		}()
 		// Read the last change file content for the latest build directory name
 		data, err := io.ReadAll(r)
 		if err != nil {
@@ -253,7 +255,7 @@ func handleFile(file file) error {
 	}
 	if rename := file.rename; len(rename) == 2 {
 		glog.Infof("Renaming %q to %q", rename[0], rename[1])
-		os.RemoveAll(rename[1]) // Ignore error.
+		_ = os.RemoveAll(rename[1]) // Ignore error.
 		if err := os.Rename(rename[0], rename[1]); err != nil {
 			glog.Warningf("Error renaming %q to %q: %v", rename[0], rename[1], err)
 		}
@@ -276,7 +278,9 @@ func downloadFile(file file) (err error) {
 	if err != nil {
 		return fmt.Errorf("%s: error downloading %q: %v", file.name, file.url, err)
 	}
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 	if file.hash != "" {
 		var h hash.Hash
 		switch strings.ToLower(file.hashType) {
@@ -316,7 +320,9 @@ func fileSameHash(file file) bool {
 	if err != nil {
 		return false
 	}
-	defer f.Close()
+	defer func() {
+		_ = f.Close()
+	}()
 
 	if _, err := io.Copy(h, f); err != nil {
 		return false

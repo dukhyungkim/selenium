@@ -82,7 +82,7 @@ func (c *Connect) Start() error {
 		return err
 	}
 	defer func() {
-		os.RemoveAll(dir) // ignore error.
+		_ = os.RemoveAll(dir) // ignore error.
 	}()
 
 	var pidFilePath string
@@ -94,7 +94,7 @@ func (c *Connect) Start() error {
 			return err
 		}
 		pidFilePath = f.Name()
-		f.Close() // ignore the error.
+		_ = f.Close() // ignore the error.
 	}
 
 	// The path specified here will be touched by the proxy process when it is
@@ -117,7 +117,7 @@ func (c *Connect) Start() error {
 		}
 	}
 	if !started {
-		c.Stop() // ignore error.
+		_ = c.Stop() // ignore error.
 		return fmt.Errorf("proxy process did not become ready before the timeout")
 	}
 	return nil
