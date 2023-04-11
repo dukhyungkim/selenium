@@ -716,9 +716,9 @@ const (
 	webElementIdentifier = "element-6066-11e4-a52e-4f735466cecf"
 )
 
-func elementIDFromValue(v map[string]string) string {
+func elementIDFromValue(m map[string]string) string {
 	for _, key := range []string{webElementIdentifier, legacyWebElementIdentifier} {
-		v, ok := v[key]
+		v, ok := m[key]
 		if !ok || v == "" {
 			continue
 		}

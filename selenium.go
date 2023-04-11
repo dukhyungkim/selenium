@@ -165,13 +165,13 @@ const (
 	Direct ProxyType = "direct"
 	// Manual proxy settings configured, e.g. setting a proxy for HTTP, a proxy
 	// for FTP, etc.
-	Manual = "manual"
+	Manual ProxyType = "manual"
 	// Autodetect proxy, probably with WPAD
-	Autodetect = "autodetect"
+	Autodetect ProxyType = "autodetect"
 	// System settings used.
-	System = "system"
+	System ProxyType = "system"
 	// PAC - Proxy autoconfiguration from a URL.
-	PAC = "pac"
+	PAC ProxyType = "pac"
 )
 
 // Status contains information returned by the Status method.
@@ -231,8 +231,8 @@ type PointerType string
 
 const (
 	MousePointer PointerType = "mouse"
-	PenPointer               = "pen"
-	TouchPointer             = "touch"
+	PenPointer   PointerType = "pen"
+	TouchPointer PointerType = "touch"
 )
 
 // PointerMoveOrigin controls how the offset for
@@ -243,7 +243,7 @@ const (
 	// FromViewport calculates the offset from the viewport at 0,0.
 	FromViewport PointerMoveOrigin = "viewport"
 	// FromPointer calculates the offset from the current pointer position.
-	FromPointer = "pointer"
+	FromPointer PointerMoveOrigin = "pointer"
 )
 
 // KeyAction represents an activity involving a keyboard key.
